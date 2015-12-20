@@ -15,12 +15,20 @@ using namespace std;
   }
   double Secante::calculateFx(double x){
 
-    //double blockOne = pow(x,4.0) - 5*pow(x,3.0); // FUNCÃO DO TRABALHO!
-    //double blockTwo = 6*pow(x,2.0) + 4*x;
-    //return (blockOne+blockTwo)-8;
-    double blockOne = pow(x,2.0); // FUNCÃO MAIS SIMPLES PARA TESTES
-    double blockTwo = x-6;
-    return blockOne+blockTwo;
+    /*  função tradicional
+    double blockOne = pow(x,4.0) - 5*pow(x,3.0); // FUNCÃO DO TRABALHO!
+    double blockTwo = 6*pow(x,2.0) + 4*x;
+    return (blockOne+blockTwo)-8;
+    */
+    // função equivalente sem o termo p de multiplicidade;
+    double blockOne = pow((x-2),3.0);
+    double blockTwo = x+1;
+    return blockOne*blockTwo;
+    /*
+      double blockOne = pow(x,2.0); // FUNCÃO MAIS SIMPLES PARA TESTES
+      double blockTwo = x-6;
+      return blockOne+blockTwo;
+    */
   }
   bool Secante::checkPrecision(){
   if(t->erro >= (t->x1 - t->x0))
@@ -39,31 +47,44 @@ using namespace std;
         t->raiz - t->fx);
   }
 
-  tipo_output * Secante::secant(){
+  tipo_output * Secante::secanteTradicional(){
 
     double numerator;
     double denominator;
     t->k += 1;
 
-    // TRADITIONAL SECANT FROMULA...
+    t->fx0 = calculateFx(t->x0);
+    t->fx1 = calculateFx(t->x1);
+
+    /* tradicional...*/
+    numerator = (t->x0 * t->fx1) - (t->x1 * t->fx0);
+    denominator = t->fx1 - t->fx0;
+
+    t->fx = numerator/denominator;
+
+    return t;
+  }
+  tipo_output * Secante::secanteMultiplicidade(){
+
+    double numerator;
+    double denominator;
+    t->k += 1;
 
     t->fx0 = calculateFx(t->x0);
     t->fx1 = calculateFx(t->x1);
 
-    numerator = (t->x0 * t->fx1) - (t->x1 * t->fx0);
+    // secante modificada com multiplicidade p = 3;
+    numerator = (3*t->fx1)*(t->x1-t->x0);
     denominator = t->fx1 - t->fx0;
 
-    // WE SUPPOSE THAT THE DENOMINATOR NEVER BE EQUAL 0 ...
     t->fx = numerator/denominator;
-
-    //showTurnIterarion(t);
+    double aux = t->fx;
+    t->fx = t->x1 - aux;
 
     return t;
   }
   tipo_output * Secante::changeTerms(){
-
     double aux1,aux2;
-
     aux1 = t->fx - t->x0;
     aux2 = t->fx - t->x1;
 
@@ -73,22 +94,30 @@ using namespace std;
     }
     t->x0 = t->x1;
     t->x1 = t->fx;
-
     return t;
   }
-  void Secante::run(){
-
+  void Secante::runTradicional(){
     int i;
-
     showMainTitle();
 
     for(i=0;i< MAXITERATIONS ;i++){
-      t = secant();
+      t = secanteTradicional();
       showTurnIterarion();
       t = changeTerms();
       if(checkPrecision())
           exit(0);
     }
   }
+  void Secante::runMultiplicidade(){
+    int i;
+    showMainTitle();
 
+    for(i=0;i< MAXITERATIONS ;i++){
+      t = secanteMultiplicidade();
+      showTurnIterarion();
+      t = changeTerms();
+      if(checkPrecision())
+          exit(0);
+    }
+  }
 

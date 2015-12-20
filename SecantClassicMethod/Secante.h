@@ -18,7 +18,7 @@ typedef struct{
 
 }tipo_output;
 
-#define MAXITERATIONS 7 // EDGE...
+#define MAXITERATIONS 9 // EDGE...
 
 class Secante{
 
@@ -28,9 +28,11 @@ class Secante{
   void setStructure(tipo_output *);
   bool checkPrecision();
   void showTurnIterarion();
-  void run();
+  void runTradicional();
+  void runMultiplicidade();
   double calculateFx(double);
-  tipo_output * secant();
+  tipo_output * secanteTradicional();
+  tipo_output * secanteMultiplicidade();
   tipo_output * changeTerms();
 
   private:
