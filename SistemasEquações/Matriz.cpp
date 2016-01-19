@@ -223,6 +223,7 @@ void Matriz::run(){
   showMatriz(times(permuteOne_to_three(),getMatriz()));
   showMatriz(times(permuteTwo_to_three(),getMatriz()));
 
+	// testando o gitignore....
 }
 
 
