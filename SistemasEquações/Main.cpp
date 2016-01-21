@@ -30,25 +30,10 @@ int main(int argc,char **argv){
 
 
   Matriz matriz(m); // instanciando...
-
-
-  /*
-  Matrizes Dadas pelo user
-  matriz.getValues();
-  matriz.getVectorD();
-  */
-
-  /* Sistema Default*/
-  matriz.setValues_Default();
-  matriz.setVectorD_Default();
   matriz.run();
-
-
-  //matriz.getMatriz();//pega matriz dada ou default
-  //matriz.showMatriz(n);
-
 
 
 
   return EXIT_SUCCESS;
 }
+

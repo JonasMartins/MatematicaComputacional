@@ -19,7 +19,11 @@ class Matriz{
   Matriz(matriz *);//Construtor
   void showSystem();//Mostra o sistema completo
   void showMatriz(matriz *);//Mostra uma matriz especifica
+  void showResult();//Mostra o resultado do sistema
+  void menu();
   void run();
+  void runDefault();
+  void runUserValues();
   void setValues();//User digita U
   void setVectorD();//User digita D
   void setValues_Default();//seta U padrão
@@ -47,3 +51,4 @@ class Matriz{
   matriz *d;
 
 };
+
