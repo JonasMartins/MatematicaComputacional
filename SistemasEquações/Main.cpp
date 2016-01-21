@@ -26,13 +26,10 @@ int main(int argc,char **argv){
   matriz *m;
   m = (matriz*)malloc(sizeof(matriz));
   m->rows = 3;
-  m->columns = 3;
-
-
+  m->columns = 3;// incialmente 3x3, para o caso base mas pode alterar posteriormente
   Matriz matriz(m); // instanciando...
+  matriz.intro();
   matriz.run();
-
-
 
   return EXIT_SUCCESS;
 }
